@@ -11,9 +11,13 @@
         cacheElement: function(selector){
             var elm;
 
-            if(selector){
+            if (typeof selector === 'string') {
                 elm = doc.querySelector(selector);
             }
+            else if (Node.prototype.isPrototypeOf(selector)) {
+                elm = selector;
+            }
+
             return elm;
         },
 

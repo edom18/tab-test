@@ -2,6 +2,10 @@
 
     'use strict';
 
+    function docReady(handler){
+        win.addEventListener('load', handler);
+    }
+
     // document ready
     docReady(function(){
         var conf1 = {
@@ -24,8 +28,8 @@
         tabs.add([tab1,tab2,tab3]);
     });
 
-    function docReady(handler){
-        win.addEventListener('load', handler);
-    }
+    docReady(function () {
+        var tabContents = new Global.view.TabContents('.content-tabs');
+    });
 
 }(window, document));
