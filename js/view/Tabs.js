@@ -1,78 +1,39 @@
 (function (win, doc, exports) {
+    var Tabs = Global.view.Elm.extend({
 
-    'use strict';
-
-    /**
-     * @constructor
-     */
-    function Tabs(selector) {
-        this.setUpTabs.apply(this, [selector]);
-        this.init.apply(this, arguments);
-    }
-    
-    /*! -----------------------------------------
-        PIBLIC
-    --------------------------------------------- */
-    Tabs.prototype = {
-
-        /**
-         * initialize
-         */
-        init: function () {
+        init: function(selector){
+            this._super(selector);
+            this.tabArr = [];
         },
 
         /**
-         * setup tabs
+         * add tab class
          */
-        setUpTabs: function(selector){
+        add: function(tabArr){
             var me = this,
-                tabSelector = me.getTabSelector(selector), 
-                tabsElm = doc.querySelectorAll(tabSelector),
-                tabClasses = me.initTabs(tabsElm);
+                isArray = tabArr instanceof Array;
 
-            me.tabClasses = tabClasses;
+            if(isArray){
+                this.addArry(tabArr);
+            }else{
+                this.tabArr.push(tabArr);
+            }
         },
 
         /**
-         * set tab
+         * add tab class from array
          */
-        initTabs: function(tabs){
-            var i = 0,
-                length = tabs.length,
-                list = [];
+        addArry: function(array){
+            var me = this,
+                length = array.length,
+                i = 0;
 
             for(; i < length; i++){
-                list.push(new Global.view.Tab(tabs[i]));
+                this.tabArr.push(array[i]);
             }
-
-            return list;
-        },
-
-        /**
-         * get tabs selector
-         */
-        getTabSelector: function(selector){
-            var child = ' ul li';
-            return selector + child;
-        },
-
-        /**
-         * get tab class
-         * @param {Number} index index of tabs
-         */
-        getTab: function(index){
-            return this.tabClasses[index];
         }
-    };
-    
-    /*! -----------------------------------------
-        PRIVATE
-    --------------------------------------------- */
+    });
 
-
-    /*! -----------------------------------------
-        EXPORTS
-    --------------------------------------------- */
+    // export
     exports.Global.view.Tabs = Tabs;
-
 }(window, document, window));
