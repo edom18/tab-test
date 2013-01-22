@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
   var staging = 'build/',
       output  = 'output', //fake
-      deploy = '../htdocs'; // TODO
+      deploy = '../htdocs'; 
 
   // Project configuration.
   grunt.initConfig({
